@@ -64,7 +64,19 @@ Depois acesse no navegador: **http://localhost:8000**
 
 ---
 
-## 🚀 Como publicar de graça (GitHub Pages)
+## 🚀 Como publicar de graça
+
+### Opção 1 — Vercel (mais fácil, recomendado)
+
+1. Acesse **https://vercel.com** e entre com a sua conta do **GitHub**.
+2. Clique em **Add New… → Project**.
+3. Encontre o repositório **diadosnamorados** e clique em **Import**.
+4. Não precisa configurar nada (é um site estático). Clique em **Deploy**.
+5. Em segundos seu site fica no ar num link tipo `https://diadosnamorados.vercel.app`.
+
+A cada novo commit, o Vercel atualiza o site sozinho. 🎉
+
+### Opção 2 — GitHub Pages
 
 1. Suba esses arquivos pro seu repositório no GitHub (já está feito 😉).
 2. No GitHub, vá em **Settings** → **Pages**.
