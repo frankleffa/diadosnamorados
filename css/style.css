@@ -1,12 +1,12 @@
 /* ===================== BASE ===================== */
 :root{
-  --rosa: #ff5e8a;
-  --rosa-claro: #ff9bb6;
-  --roxo: #b14bff;
-  --fundo1: #1a0510;
-  --fundo2: #2a0820;
-  --texto: #ffe9f1;
-  --texto-suave: #ffc9da;
+  --rosa: #ff2d3f;        /* vermelho vibrante (cor principal) */
+  --rosa-claro: #ff8a8f;  /* vermelho claro */
+  --roxo: #b00d18;        /* vermelho profundo (acento) */
+  --fundo1: #1c0406;
+  --fundo2: #2a070a;
+  --texto: #ffe9ea;
+  --texto-suave: #ffc9cd;
 }
 
 *{ margin:0; padding:0; box-sizing:border-box; }
@@ -15,7 +15,7 @@ html{ scroll-behavior:smooth; }
 
 body{
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#1a0510,#2a0820,#3a0a2a,#2a0820,#1a0510);
+  background:linear-gradient(135deg,#1c0406,#2a070a,#3a0a0d,#2a070a,#1c0406);
   background-size:300% 300%;
   animation:fundoVivo 18s ease infinite;
   color:var(--texto);

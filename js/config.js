@@ -9,7 +9,7 @@ const CONFIG = {
 
   /* ---------- NOMES DO CASAL ---------- */
   // Aparece grande no topo da página.
-  nomeCasal: "Frank ❤️ Amor",
+  nomeCasal: "Frank ❤️ Ana",
 
   /* ---------- TÍTULO DA ABA DO NAVEGADOR ---------- */
   tituloAba: "Feliz Dia dos Namorados ❤️",
@@ -17,8 +17,8 @@ const CONFIG = {
   /* ---------- DATA EM QUE VOCÊS COMEÇARAM ----------
      Formato: ano, mês, dia, hora, minuto
      ATENÇÃO: o mês começa em 0! (Janeiro = 0, Fevereiro = 1, ... Dezembro = 11)
-     Exemplo abaixo = 14 de fevereiro de 2023, às 20:30 */
-  dataInicio: new Date(2023, 1, 14, 20, 30, 0),
+     Exemplo abaixo = 1 de janeiro de 2022, à meia-noite */
+  dataInicio: new Date(2022, 0, 1, 0, 0, 0),
 
   /* ---------- TEXTO DA CARTA (tela de abertura, antes de abrir o selo) ----------
      Use \n para quebrar linha. */
@@ -29,7 +29,7 @@ const CONFIG = {
 
   /* ---------- MENSAGEM DE AMOR ----------
      Pode usar várias linhas. Use \n para quebrar linha. */
-  mensagem: "Meu amor,\n\nCada segundo ao seu lado é o meu lugar favorito no mundo. " +
+  mensagem: "Ana,\n\nCada segundo ao seu lado é o meu lugar favorito no mundo. " +
             "Obrigado por encher os meus dias de sorrisos, carinho e aventuras. " +
             "Você é o meu presente todos os dias, não só hoje.\n\n" +
             "Feliz Dia dos Namorados! Eu te amo. ❤️",
