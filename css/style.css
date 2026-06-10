@@ -1,0 +1,172 @@
+/* ===================== BASE ===================== */
+:root{
+  --rosa: #ff5e8a;
+  --rosa-claro: #ff9bb6;
+  --roxo: #b14bff;
+  --fundo1: #1a0510;
+  --fundo2: #2a0820;
+  --texto: #ffe9f1;
+  --texto-suave: #ffc9da;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(160deg,var(--fundo1),var(--fundo2) 60%,#3a0a2a);
+  color:var(--texto);
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* ===================== CÉU ESTRELADO ===================== */
+.ceu{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+.estrela{
+  position:absolute; background:#fff; border-radius:50%;
+  animation:piscar var(--dur,3s) ease-in-out infinite alternate;
+}
+@keyframes piscar{ from{opacity:.15;} to{opacity:1;} }
+
+/* ===================== CHUVA DE CORAÇÕES ===================== */
+.chuva{ position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
+.gota{
+  position:absolute; top:-40px; font-size:1.2rem;
+  animation:cair linear infinite; opacity:.85;
+  will-change:transform;
+}
+@keyframes cair{
+  0%{ transform:translateY(-40px) rotate(0deg); }
+  100%{ transform:translateY(110vh) rotate(360deg); }
+}
+
+/* ===================== BOTÃO MÚSICA ===================== */
+.botao-musica{
+  position:fixed; top:16px; right:16px; z-index:50;
+  width:46px; height:46px; border-radius:50%;
+  background:rgba(255,94,138,.2); border:1px solid var(--rosa);
+  color:var(--rosa-claro); font-size:1.3rem; cursor:pointer;
+  backdrop-filter:blur(6px); transition:transform .2s, background .2s;
+  display:flex; align-items:center; justify-content:center;
+}
+.botao-musica:hover{ transform:scale(1.1); }
+.botao-musica.tocando .icone-musica{ animation:girar 3s linear infinite; }
+@keyframes girar{ to{ transform:rotate(360deg); } }
+
+/* ===================== ABERTURA ===================== */
+.abertura{
+  position:fixed; inset:0; z-index:100;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:linear-gradient(160deg,var(--fundo1),#3a0a2a);
+  text-align:center; padding:24px; gap:18px;
+  transition:opacity .8s ease, visibility .8s;
+}
+.abertura.oculto{ opacity:0; visibility:hidden; }
+.coracao-pulsando{ font-size:5rem; animation:bater 1.2s ease-in-out infinite; }
+@keyframes bater{ 0%,100%{transform:scale(1);} 15%{transform:scale(1.25);} 30%{transform:scale(1);} 45%{transform:scale(1.2);} }
+.abertura-titulo{ font-family:'Dancing Script',cursive; font-size:2.6rem; color:var(--rosa-claro); font-weight:700; }
+.botao-abrir{
+  margin-top:8px; padding:14px 30px; font-size:1.05rem; font-weight:500;
+  border:none; border-radius:40px; cursor:pointer; color:#fff;
+  background:linear-gradient(135deg,var(--rosa),var(--roxo));
+  box-shadow:0 8px 24px rgba(255,94,138,.45); transition:transform .2s;
+  font-family:'Poppins',sans-serif;
+}
+.botao-abrir:hover{ transform:translateY(-3px) scale(1.03); }
+.abertura-dica{ font-size:.85rem; color:var(--texto-suave); opacity:.7; }
+
+/* ===================== CONTEÚDO ===================== */
+.conteudo{
+  position:relative; z-index:10; max-width:680px; margin:0 auto;
+  padding:40px 20px 60px; opacity:0; transition:opacity 1s ease;
+}
+.conteudo.visivel{ opacity:1; }
+
+.hero{ text-align:center; margin-bottom:36px; }
+.hero-sub{
+  text-transform:uppercase; letter-spacing:3px; font-size:.8rem;
+  color:var(--texto-suave); margin-bottom:8px;
+}
+.hero-nomes{
+  font-family:'Dancing Script',cursive; font-weight:700;
+  font-size:clamp(2.4rem,9vw,3.8rem);
+  background:linear-gradient(135deg,var(--rosa-claro),var(--roxo));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  line-height:1.1;
+}
+
+/* ===================== BLOCOS ===================== */
+.bloco{
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08);
+  border-radius:22px; padding:26px 22px; margin-bottom:24px;
+  backdrop-filter:blur(8px);
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+.bloco-titulo{
+  font-family:'Dancing Script',cursive; font-size:1.9rem; font-weight:700;
+  color:var(--rosa-claro); text-align:center; margin-bottom:18px;
+}
+
+/* ===================== CONTADOR ===================== */
+.contador-label{ text-align:center; color:var(--texto-suave); margin-bottom:16px; font-size:1rem; }
+.contador{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.unidade{
+  background:rgba(255,94,138,.12); border:1px solid rgba(255,94,138,.25);
+  border-radius:16px; padding:14px 6px; text-align:center;
+}
+.valor{
+  display:block; font-size:1.9rem; font-weight:600; color:#fff;
+  font-variant-numeric:tabular-nums;
+}
+.rotulo{ display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:var(--texto-suave); margin-top:4px; }
+.contador-frase{ text-align:center; margin-top:18px; color:var(--texto-suave); font-size:.92rem; }
+
+/* ===================== GALERIA ===================== */
+.carrossel{ position:relative; border-radius:18px; overflow:hidden; }
+.slides{ display:flex; transition:transform .5s ease; }
+.slide{ min-width:100%; aspect-ratio:4/5; background:#2a0820; }
+.slide img{ width:100%; height:100%; object-fit:cover; display:block; }
+.slide-vazio{
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  gap:10px; color:var(--texto-suave); font-size:.9rem; text-align:center; padding:20px;
+  min-width:100%; aspect-ratio:4/5;
+  background:repeating-linear-gradient(45deg,rgba(255,94,138,.08),rgba(255,94,138,.08) 14px,rgba(255,94,138,.14) 14px,rgba(255,94,138,.14) 28px);
+}
+.slide-vazio span{ font-size:2.5rem; }
+.seta{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:42px; height:42px; border-radius:50%; border:none; cursor:pointer;
+  background:rgba(0,0,0,.4); color:#fff; font-size:1.6rem; line-height:1;
+  display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px);
+}
+.seta-esq{ left:10px; } .seta-dir{ right:10px; }
+.legenda{ text-align:center; margin-top:14px; color:var(--texto); font-size:.95rem; min-height:1.2em; }
+.bolinhas{ display:flex; gap:8px; justify-content:center; margin-top:14px; }
+.bolinha{ width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.3); cursor:pointer; transition:background .3s,transform .3s; }
+.bolinha.ativa{ background:var(--rosa); transform:scale(1.3); }
+
+/* ===================== MENSAGEM ===================== */
+.mensagem{
+  white-space:pre-line; line-height:1.8; text-align:center;
+  font-size:1.05rem; color:var(--texto); font-weight:300;
+}
+
+/* ===================== SPOTIFY ===================== */
+.spotify-bloco iframe{ width:100%; border-radius:12px; border:none; }
+
+/* ===================== RODAPÉ ===================== */
+.rodape{ text-align:center; margin-top:30px; color:var(--texto-suave); }
+.coracao-rodape{ font-size:2rem; animation:bater 1.4s ease-in-out infinite; }
+.rodape p{ font-size:.85rem; opacity:.7; margin-top:6px; }
+
+/* ===================== RESPONSIVO ===================== */
+@media (min-width:520px){
+  .contador{ grid-template-columns:repeat(6,1fr); }
+  .valor{ font-size:1.6rem; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; }
+}

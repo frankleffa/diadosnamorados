@@ -1,0 +1,8 @@
+📷 COLOQUE AS FOTOS DO CASAL AQUI
+
+1. Salve suas fotos nesta pasta (fotos/).
+2. Use nomes simples, sem espaços ou acentos. Ex: foto1.jpg, foto2.jpg
+3. Liste os nomes no arquivo js/config.js, na parte "fotos:".
+
+Dica: fotos em pé (vertical) ficam mais bonitas, pois a moldura é 4:5.
+Formatos aceitos: .jpg, .jpeg, .png, .webp

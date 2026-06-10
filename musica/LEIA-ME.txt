@@ -1,0 +1,13 @@
+🎵 MÚSICA DE FUNDO (opcional)
+
+Opção A — Arquivo MP3:
+  1. Coloque um arquivo .mp3 nesta pasta. Ex: nossa-musica.mp3
+  2. No arquivo js/config.js, preencha:
+       musicaArquivo: "musica/nossa-musica.mp3",
+
+Opção B — Spotify (mais fácil):
+  1. No Spotify, abra a música, clique em "..." > Compartilhar > Copiar link.
+  2. No arquivo js/config.js, preencha:
+       musicaSpotify: "https://open.spotify.com/track/XXXXXXXX",
+
+Use só uma das opções. Deixe a outra com "" (vazio).

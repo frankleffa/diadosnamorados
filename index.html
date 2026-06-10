@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a0510" />
+  <title>Feliz Dia dos Namorados ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Céu estrelado + chuva de corações (geradas via JS) -->
+  <div class="ceu" id="ceu"></div>
+  <div class="chuva" id="chuva" aria-hidden="true"></div>
+
+  <!-- Botão de música -->
+  <button class="botao-musica" id="botaoMusica" title="Tocar música" aria-label="Tocar música">
+    <span class="icone-musica">♪</span>
+  </button>
+
+  <!-- Tela de abertura -->
+  <section class="abertura" id="abertura">
+    <div class="coracao-pulsando">❤️</div>
+    <h2 class="abertura-titulo" id="aberturaNomes">Frank &amp; Amor</h2>
+    <button class="botao-abrir" id="botaoAbrir">Abrir nosso presente 💌</button>
+    <p class="abertura-dica">toque para começar</p>
+  </section>
+
+  <!-- Conteúdo principal -->
+  <main class="conteudo" id="conteudo">
+
+    <header class="hero">
+      <p class="hero-sub">Feliz Dia dos Namorados</p>
+      <h1 class="hero-nomes" id="heroNomes">Frank ❤️ Amor</h1>
+    </header>
+
+    <!-- Contador -->
+    <section class="bloco contador-bloco">
+      <p class="contador-label">Estamos juntos há</p>
+      <div class="contador" id="contador">
+        <div class="unidade"><span class="valor" id="anos">0</span><span class="rotulo">anos</span></div>
+        <div class="unidade"><span class="valor" id="meses">0</span><span class="rotulo">meses</span></div>
+        <div class="unidade"><span class="valor" id="dias">0</span><span class="rotulo">dias</span></div>
+        <div class="unidade"><span class="valor" id="horas">0</span><span class="rotulo">horas</span></div>
+        <div class="unidade"><span class="valor" id="minutos">0</span><span class="rotulo">min</span></div>
+        <div class="unidade"><span class="valor" id="segundos">0</span><span class="rotulo">seg</span></div>
+      </div>
+      <p class="contador-frase" id="contadorFrase"></p>
+    </section>
+
+    <!-- Galeria de fotos -->
+    <section class="bloco galeria-bloco" id="galeriaBloco">
+      <h3 class="bloco-titulo">Nossos momentos</h3>
+      <div class="carrossel">
+        <div class="slides" id="slides"></div>
+        <button class="seta seta-esq" id="setaEsq" aria-label="Foto anterior">‹</button>
+        <button class="seta seta-dir" id="setaDir" aria-label="Próxima foto">›</button>
+      </div>
+      <p class="legenda" id="legenda"></p>
+      <div class="bolinhas" id="bolinhas"></div>
+    </section>
+
+    <!-- Mensagem -->
+    <section class="bloco mensagem-bloco">
+      <h3 class="bloco-titulo">Pra você</h3>
+      <p class="mensagem" id="mensagem"></p>
+    </section>
+
+    <!-- Spotify (opcional) -->
+    <section class="bloco spotify-bloco" id="spotifyBloco" style="display:none;">
+      <h3 class="bloco-titulo">Nossa música</h3>
+      <div id="spotifyEmbed"></div>
+    </section>
+
+    <footer class="rodape">
+      <div class="coracao-rodape">❤️</div>
+      <p>Feito com amor</p>
+    </footer>
+  </main>
+
+  <audio id="audio" loop></audio>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
