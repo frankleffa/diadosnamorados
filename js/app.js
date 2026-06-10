@@ -24,7 +24,7 @@
   document.getElementById("heroNomes").textContent = CFG.nomeCasal || "";
   document.getElementById("aberturaNomes").textContent = CFG.nomeCasal || "";
   document.getElementById("contadorFrase").textContent = CFG.fraseContador || "";
-  document.getElementById("mensagem").textContent = CFG.mensagem || "";
+  var textoMensagem = CFG.mensagem || "";   // será "digitada" quando aparecer na tela
 
   /* ===================== CÉU ESTRELADO ===================== */
   (function criarEstrelas() {
@@ -213,15 +213,87 @@
     }
   })();
 
+  /* ===================== EXPLOSÃO DE CORAÇÕES ===================== */
+  function explodir(qtd) {
+    const emoji = CFG.emojiChuva || "❤️";
+    const camada = document.createElement("div");
+    camada.className = "explosao";
+    document.body.appendChild(camada);
+    for (let i = 0; i < qtd; i++) {
+      const p = document.createElement("span");
+      p.textContent = emoji;
+      const ang = Math.random() * Math.PI * 2;
+      const dist = Math.random() * 240 + 80;
+      p.style.setProperty("--tx", Math.cos(ang) * dist + "px");
+      p.style.setProperty("--ty", Math.sin(ang) * dist + "px");
+      p.style.fontSize = (Math.random() * 1.4 + 0.8) + "rem";
+      p.style.animationDelay = (Math.random() * 0.15) + "s";
+      camada.appendChild(p);
+    }
+    setTimeout(() => camada.remove(), 1600);
+  }
+
+  /* ===================== REVELAR AO ROLAR + DIGITAÇÃO ===================== */
+  (function revelar() {
+    const alvos = document.querySelectorAll(".hero, .bloco");
+    alvos.forEach((el) => el.classList.add("reveal"));
+
+    const mensagemEl = document.getElementById("mensagem");
+    let digitou = false;
+
+    function digitar() {
+      if (digitou) return;
+      digitou = true;
+      let i = 0;
+      mensagemEl.classList.add("digitando");
+      (function passo() {
+        mensagemEl.textContent = textoMensagem.slice(0, i);
+        if (i < textoMensagem.length) {
+          i++;
+          // mais rápido em espaços, mais lento na pontuação
+          const c = textoMensagem.charAt(i - 1);
+          const espera = ".!?".includes(c) ? 180 : 28;
+          setTimeout(passo, espera);
+        } else {
+          mensagemEl.classList.remove("digitando");
+        }
+      })();
+    }
+
+    // Só começa a observar depois que o presente é aberto.
+    window.__iniciarReveal = function () {
+      if ("IntersectionObserver" in window) {
+        const obs = new IntersectionObserver((entradas) => {
+          entradas.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("ativo");
+              if (e.target.classList.contains("mensagem-bloco")) digitar();
+              obs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.2 });
+        alvos.forEach((el) => obs.observe(el));
+      } else {
+        alvos.forEach((el) => el.classList.add("ativo"));
+        digitar();
+      }
+    };
+  })();
+
   /* ===================== ABERTURA ===================== */
   (function abertura() {
     const tela = document.getElementById("abertura");
     const conteudo = document.getElementById("conteudo");
     const botao = document.getElementById("botaoAbrir");
     botao.addEventListener("click", () => {
+      explodir(46);
       tela.classList.add("oculto");
       conteudo.classList.add("visivel");
       if (window.__iniciarMusica) window.__iniciarMusica();
+      // começa as revelações só agora, com a página já visível
+      setTimeout(() => {
+        if (window.__iniciarReveal) window.__iniciarReveal();
+      }, 300);
     });
   })();
 

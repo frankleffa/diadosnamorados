@@ -15,12 +15,15 @@ html{ scroll-behavior:smooth; }
 
 body{
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(160deg,var(--fundo1),var(--fundo2) 60%,#3a0a2a);
+  background:linear-gradient(135deg,#1a0510,#2a0820,#3a0a2a,#2a0820,#1a0510);
+  background-size:300% 300%;
+  animation:fundoVivo 18s ease infinite;
   color:var(--texto);
   min-height:100vh;
   overflow-x:hidden;
   position:relative;
 }
+@keyframes fundoVivo{ 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
 
 /* ===================== CÉU ESTRELADO ===================== */
 .ceu{ position:fixed; inset:0; z-index:0; pointer-events:none; }
@@ -92,10 +95,14 @@ body{
 .hero-nomes{
   font-family:'Dancing Script',cursive; font-weight:700;
   font-size:clamp(2.4rem,9vw,3.8rem);
-  background:linear-gradient(135deg,var(--rosa-claro),var(--roxo));
+  background:linear-gradient(135deg,var(--rosa-claro),#fff,var(--roxo),var(--rosa-claro));
+  background-size:250% auto;
   -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
   line-height:1.1;
+  animation:brilhoTexto 5s linear infinite;
+  filter:drop-shadow(0 0 18px rgba(255,94,138,.45));
 }
+@keyframes brilhoTexto{ to{ background-position:250% center; } }
 
 /* ===================== BLOCOS ===================== */
 .bloco{
@@ -127,7 +134,8 @@ body{
 .carrossel{ position:relative; border-radius:18px; overflow:hidden; }
 .slides{ display:flex; transition:transform .5s ease; }
 .slide{ min-width:100%; aspect-ratio:4/5; background:#2a0820; }
-.slide img{ width:100%; height:100%; object-fit:cover; display:block; }
+.slide img{ width:100%; height:100%; object-fit:cover; display:block; animation:kenburns 12s ease-in-out infinite alternate; }
+@keyframes kenburns{ from{ transform:scale(1) translate(0,0); } to{ transform:scale(1.12) translate(-2%,-2%); } }
 .slide-vazio{
   display:flex; align-items:center; justify-content:center; flex-direction:column;
   gap:10px; color:var(--texto-suave); font-size:.9rem; text-align:center; padding:20px;
@@ -167,6 +175,51 @@ body{
   .valor{ font-size:1.6rem; }
 }
 
+/* ===================== REVELAR AO ROLAR ===================== */
+.reveal{ opacity:0; transform:translateY(40px) scale(.98); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.3,1); }
+.reveal.ativo{ opacity:1; transform:none; }
+
+/* ===================== CARDS COM BRILHO ===================== */
+.bloco{ position:relative; overflow:hidden; }
+.bloco::before{
+  content:""; position:absolute; top:0; left:-60%; width:40%; height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.12),transparent);
+  transform:skewX(-20deg); animation:reflexo 6s ease-in-out infinite;
+}
+@keyframes reflexo{ 0%,70%{ left:-60%; } 100%{ left:130%; } }
+
+/* ===================== UNIDADES DO CONTADOR ===================== */
+.unidade{ transition:transform .3s; }
+.unidade:hover{ transform:translateY(-4px); }
+#segundos{ color:var(--rosa-claro); }
+
+/* ===================== DIGITAÇÃO ===================== */
+.mensagem.digitando::after{
+  content:"|"; color:var(--rosa); margin-left:2px;
+  animation:piscaCursor .8s step-end infinite;
+}
+@keyframes piscaCursor{ 50%{ opacity:0; } }
+
+/* ===================== EXPLOSÃO DE CORAÇÕES ===================== */
+.explosao{
+  position:fixed; top:50%; left:50%; z-index:200; pointer-events:none;
+  width:0; height:0;
+}
+.explosao span{
+  position:absolute; top:0; left:0;
+  animation:explode 1.4s ease-out forwards;
+}
+@keyframes explode{
+  0%{ transform:translate(-50%,-50%) scale(.2); opacity:1; }
+  100%{ transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(1.1) rotate(40deg); opacity:0; }
+}
+
+/* ===================== CORAÇÃO PULSANTE COM BRILHO ===================== */
+.coracao-pulsando{ filter:drop-shadow(0 0 24px rgba(255,94,138,.7)); }
+.botao-abrir{ animation:respira 2.4s ease-in-out infinite; }
+@keyframes respira{ 0%,100%{ box-shadow:0 8px 24px rgba(255,94,138,.45); } 50%{ box-shadow:0 8px 38px rgba(177,75,255,.7); } }
+
 @media (prefers-reduced-motion:reduce){
   *{ animation:none !important; }
+  .reveal{ opacity:1; transform:none; }
 }
