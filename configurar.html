@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configurar minha página ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{ --rosa:#ff5e8a; --roxo:#b14bff; --fundo:#1a0510; --card:#2a0820; }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{
+      font-family:'Poppins',sans-serif; color:#ffe9f1;
+      background:linear-gradient(160deg,#1a0510,#2a0820 60%,#3a0a2a);
+      min-height:100vh; padding:28px 16px 80px;
+    }
+    .wrap{ max-width:640px; margin:0 auto; }
+    h1{ font-family:'Dancing Script',cursive; font-size:2.6rem; text-align:center;
+        background:linear-gradient(135deg,#ff9bb6,#b14bff);
+        -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .intro{ text-align:center; color:#ffc9da; font-size:.95rem; margin:6px 0 26px; }
+    .grupo{
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+      border-radius:18px; padding:20px; margin-bottom:18px;
+    }
+    .grupo h2{ font-size:1.05rem; color:#ff9bb6; margin-bottom:14px; display:flex; gap:8px; align-items:center; }
+    label{ display:block; font-size:.85rem; color:#ffc9da; margin:12px 0 6px; }
+    .dica{ font-size:.75rem; color:#ffc9da; opacity:.7; margin-top:4px; }
+    input[type=text], input[type=date], input[type=time], input[type=url], textarea, select{
+      width:100%; padding:11px 13px; border-radius:11px; border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.25); color:#fff; font-family:inherit; font-size:.95rem;
+    }
+    input:focus, textarea:focus, select:focus{ outline:none; border-color:var(--rosa); }
+    textarea{ min-height:120px; resize:vertical; line-height:1.6; }
+    .linha{ display:flex; gap:12px; } .linha > div{ flex:1; }
+
+    /* Upload de fotos */
+    .drop{
+      border:2px dashed rgba(255,94,138,.5); border-radius:14px; padding:22px;
+      text-align:center; cursor:pointer; transition:background .2s, border-color .2s;
+    }
+    .drop:hover{ background:rgba(255,94,138,.08); border-color:var(--rosa); }
+    .drop span{ font-size:2rem; display:block; margin-bottom:6px; }
+    .fotos-lista{ display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:12px; margin-top:16px; }
+    .foto-item{ background:rgba(0,0,0,.3); border-radius:12px; overflow:hidden; position:relative; }
+    .foto-item img{ width:100%; height:120px; object-fit:cover; display:block; }
+    .foto-item input{ width:100%; border:none; border-top:1px solid rgba(255,255,255,.1);
+      background:rgba(0,0,0,.4); color:#fff; font-size:.78rem; padding:7px 8px; border-radius:0; }
+    .foto-item .remover{
+      position:absolute; top:6px; right:6px; width:26px; height:26px; border-radius:50%;
+      border:none; background:rgba(0,0,0,.6); color:#fff; cursor:pointer; font-size:1rem; line-height:1;
+    }
+    .foto-item .ordem{ position:absolute; top:6px; left:6px; display:flex; gap:4px; }
+    .foto-item .ordem button{ width:24px; height:24px; border-radius:6px; border:none;
+      background:rgba(0,0,0,.6); color:#fff; cursor:pointer; font-size:.85rem; }
+
+    /* Botões */
+    .acoes{ position:sticky; bottom:0; display:flex; gap:12px; padding:16px 0 4px;
+      background:linear-gradient(transparent, #2a0820 30%); margin-top:10px; }
+    button.principal, button.secundario{
+      flex:1; padding:15px; border:none; border-radius:40px; font-size:1rem; font-weight:600;
+      cursor:pointer; font-family:inherit; transition:transform .15s;
+    }
+    button.principal{ color:#fff; background:linear-gradient(135deg,var(--rosa),var(--roxo));
+      box-shadow:0 8px 22px rgba(255,94,138,.4); }
+    button.secundario{ color:#ffe9f1; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); }
+    button.principal:hover, button.secundario:hover{ transform:translateY(-2px); }
+    .aviso{ font-size:.82rem; color:#ffd27a; background:rgba(255,210,122,.1);
+      border:1px solid rgba(255,210,122,.3); border-radius:10px; padding:10px 12px; margin-top:14px; line-height:1.5; }
+    .ok{ display:none; text-align:center; color:#9bffb6; margin-top:14px; font-size:.9rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Configurar nossa página 💖</h1>
+    <p class="intro">Preencha tudo abaixo, veja a prévia e baixe o arquivo pronto. Sem mexer em código!</p>
+
+    <div class="grupo">
+      <h2>💕 O casal</h2>
+      <label>Nome do casal (aparece grande no topo)</label>
+      <input type="text" id="nomeCasal" placeholder="Ex: Frank ❤️ Maria" />
+      <label>Título da aba do navegador</label>
+      <input type="text" id="tituloAba" placeholder="Feliz Dia dos Namorados ❤️" />
+    </div>
+
+    <div class="grupo">
+      <h2>⏳ Quando tudo começou</h2>
+      <div class="linha">
+        <div>
+          <label>Data que começaram a namorar</label>
+          <input type="date" id="data" />
+        </div>
+        <div>
+          <label>Hora (opcional)</label>
+          <input type="time" id="hora" value="00:00" />
+        </div>
+      </div>
+      <label>Frase abaixo do contador</label>
+      <input type="text" id="fraseContador" placeholder="Tempo que estamos juntos 💕" />
+    </div>
+
+    <div class="grupo">
+      <h2>📸 Nossas fotos</h2>
+      <div class="drop" id="drop">
+        <span>📷</span>
+        Toque aqui para escolher as fotos
+        <div class="dica">Pode escolher várias de uma vez. Fotos em pé ficam mais bonitas.</div>
+      </div>
+      <input type="file" id="inputFotos" accept="image/*" multiple style="display:none" />
+      <div class="fotos-lista" id="fotosLista"></div>
+    </div>
+
+    <div class="grupo">
+      <h2>💌 Mensagem de amor</h2>
+      <label>Seu recado (pode usar várias linhas)</label>
+      <textarea id="mensagem" placeholder="Meu amor, cada segundo ao seu lado..."></textarea>
+    </div>
+
+    <div class="grupo">
+      <h2>🎵 Música (opcional)</h2>
+      <label>Link de uma música do Spotify</label>
+      <input type="url" id="musicaSpotify" placeholder="https://open.spotify.com/track/..." />
+      <div class="dica">No Spotify: abra a música → ··· → Compartilhar → Copiar link.</div>
+    </div>
+
+    <div class="grupo">
+      <h2>✨ Detalhe</h2>
+      <label>Emoji que cai na tela</label>
+      <select id="emojiChuva">
+        <option value="❤️">❤️ Coração vermelho</option>
+        <option value="💖">💖 Coração brilhante</option>
+        <option value="🌹">🌹 Rosa</option>
+        <option value="💕">💕 Dois corações</option>
+        <option value="✨">✨ Brilhos</option>
+        <option value="🦋">🦋 Borboleta</option>
+      </select>
+    </div>
+
+    <div class="aviso">
+      ⚠️ Suas informações ficam só no seu navegador. Para a página ficar no ar de verdade,
+      clique em <b>"Baixar arquivo pronto"</b> e siga as instruções que aparecem.
+    </div>
+
+    <div class="acoes">
+      <button class="secundario" id="btnPrevia">👀 Ver prévia</button>
+      <button class="principal" id="btnBaixar">⬇️ Baixar arquivo pronto</button>
+    </div>
+    <p class="ok" id="okMsg"></p>
+  </div>
+
+  <script src="js/configurar.js"></script>
+</body>
+</html>

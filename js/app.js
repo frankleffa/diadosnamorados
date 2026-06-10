@@ -6,12 +6,25 @@
 (function () {
   "use strict";
 
+  /* ---------- Define qual configuração usar ----------
+     Por padrão usa o arquivo js/config.js (CONFIG).
+     Mas se a página for aberta em modo prévia (index.html?previa=1),
+     usa os dados salvos pela página de configuração. */
+  var CFG = (typeof CONFIG !== "undefined") ? CONFIG : {};
+  try {
+    var params = new URLSearchParams(location.search);
+    if (params.get("previa") === "1") {
+      var salvo = localStorage.getItem("ddn_previa");
+      if (salvo) { CFG = JSON.parse(salvo); }
+    }
+  } catch (e) { /* ignora */ }
+
   /* ---------- Aplica textos do config ---------- */
-  document.title = CONFIG.tituloAba || "Feliz Dia dos Namorados";
-  document.getElementById("heroNomes").textContent = CONFIG.nomeCasal;
-  document.getElementById("aberturaNomes").textContent = CONFIG.nomeCasal;
-  document.getElementById("contadorFrase").textContent = CONFIG.fraseContador || "";
-  document.getElementById("mensagem").textContent = CONFIG.mensagem || "";
+  document.title = CFG.tituloAba || "Feliz Dia dos Namorados";
+  document.getElementById("heroNomes").textContent = CFG.nomeCasal || "";
+  document.getElementById("aberturaNomes").textContent = CFG.nomeCasal || "";
+  document.getElementById("contadorFrase").textContent = CFG.fraseContador || "";
+  document.getElementById("mensagem").textContent = CFG.mensagem || "";
 
   /* ===================== CÉU ESTRELADO ===================== */
   (function criarEstrelas() {
@@ -31,7 +44,7 @@
   /* ===================== CHUVA DE CORAÇÕES ===================== */
   (function chuvaCoracoes() {
     const chuva = document.getElementById("chuva");
-    const emoji = CONFIG.emojiChuva || "❤️";
+    const emoji = CFG.emojiChuva || "❤️";
     function soltar() {
       const gota = document.createElement("span");
       gota.className = "gota";
@@ -48,7 +61,8 @@
 
   /* ===================== CONTADOR AO VIVO ===================== */
   (function contador() {
-    const inicio = CONFIG.dataInicio;
+    // Aceita tanto um objeto Date (do config.js) quanto texto ISO (da prévia)
+    const inicio = new Date(CFG.dataInicio);
     const els = {
       anos: document.getElementById("anos"),
       meses: document.getElementById("meses"),
@@ -93,8 +107,8 @@
 
   /* ===================== GALERIA / CARROSSEL ===================== */
   (function galeria() {
-    const fotos = CONFIG.fotos || [];
-    const legendas = CONFIG.legendas || [];
+    const fotos = CFG.fotos || [];
+    const legendas = CFG.legendas || [];
     const slidesEl = document.getElementById("slides");
     const bolinhasEl = document.getElementById("bolinhas");
     const legendaEl = document.getElementById("legenda");
@@ -154,8 +168,8 @@
     let tocando = false;
 
     // Opção Spotify
-    if (CONFIG.musicaSpotify) {
-      const id = extrairSpotify(CONFIG.musicaSpotify);
+    if (CFG.musicaSpotify) {
+      const id = extrairSpotify(CFG.musicaSpotify);
       if (id) {
         document.getElementById("spotifyBloco").style.display = "block";
         document.getElementById("spotifyEmbed").innerHTML =
@@ -164,14 +178,14 @@
     }
 
     // Opção arquivo de áudio
-    if (CONFIG.musicaArquivo) {
-      audio.src = CONFIG.musicaArquivo;
+    if (CFG.musicaArquivo) {
+      audio.src = CFG.musicaArquivo;
     } else {
-      botao.style.display = CONFIG.musicaSpotify ? "none" : botao.style.display;
+      botao.style.display = CFG.musicaSpotify ? "none" : botao.style.display;
     }
 
     function toggle() {
-      if (!CONFIG.musicaArquivo) return;
+      if (!CFG.musicaArquivo) return;
       if (tocando) {
         audio.pause();
         botao.classList.remove("tocando");
@@ -185,7 +199,7 @@
 
     // Tenta iniciar a música quando o presente é aberto
     window.__iniciarMusica = function () {
-      if (CONFIG.musicaArquivo && !tocando) {
+      if (CFG.musicaArquivo && !tocando) {
         audio.play().then(() => {
           tocando = true;
           botao.classList.add("tocando");
