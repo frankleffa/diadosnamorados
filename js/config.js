@@ -20,6 +20,10 @@ const CONFIG = {
      Exemplo abaixo = 14 de fevereiro de 2023, às 20:30 */
   dataInicio: new Date(2023, 1, 14, 20, 30, 0),
 
+  /* ---------- TEXTO DA CARTA (tela de abertura, antes de abrir o selo) ----------
+     Use \n para quebrar linha. */
+  cartaConvite: "Hoje é o nosso dia.\nPreparei uma coisinha especial só pra você ler com calma... 💌",
+
   /* ---------- FRASE ABAIXO DO CONTADOR ---------- */
   fraseContador: "Tempo que estamos compartilhando momentos juntos 💕",
 

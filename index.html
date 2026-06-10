@@ -7,7 +7,7 @@
   <title>Feliz Dia dos Namorados ❤️</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -21,12 +21,34 @@
     <span class="icone-musica">♪</span>
   </button>
 
-  <!-- Tela de abertura -->
+  <!-- Tela de abertura: carta lacrada -->
   <section class="abertura" id="abertura">
-    <div class="coracao-pulsando">❤️</div>
-    <h2 class="abertura-titulo" id="aberturaNomes">Frank &amp; Amor</h2>
-    <button class="botao-abrir" id="botaoAbrir">Abrir nosso presente 💌</button>
-    <p class="abertura-dica">toque para começar</p>
+    <div class="env-cena" id="envCena">
+
+      <div class="envelope" id="envelope">
+        <!-- A carta que sobe de dentro -->
+        <div class="carta" id="carta">
+          <p class="carta-cabecalho">· Carta de amor ·</p>
+          <h2 class="carta-nomes" id="aberturaNomes">Frank ❤️ Amor</h2>
+          <p class="carta-texto" id="cartaTexto">
+            Hoje é o nosso dia.<br />
+            Preparei uma coisinha especial só pra você ler com calma... 💌
+          </p>
+          <button class="botao-continuar" id="botaoAbrir">continuar a leitura ❤</button>
+        </div>
+
+        <!-- Corpo do envelope -->
+        <div class="env-corpo"></div>
+        <!-- Aba que abre -->
+        <div class="env-aba" id="envAba"></div>
+        <!-- Selo de cera vermelho -->
+        <button class="selo" id="selo" aria-label="Abrir a carta">
+          <span class="selo-coracao">❤</span>
+        </button>
+      </div>
+
+      <p class="abertura-dica" id="aberturaDica">toque no selo para abrir 💝</p>
+    </div>
   </section>
 
   <!-- Conteúdo principal -->

@@ -25,6 +25,10 @@
   document.getElementById("aberturaNomes").textContent = CFG.nomeCasal || "";
   document.getElementById("contadorFrase").textContent = CFG.fraseContador || "";
   var textoMensagem = CFG.mensagem || "";   // será "digitada" quando aparecer na tela
+  if (CFG.cartaConvite) {
+    document.getElementById("cartaTexto").innerHTML =
+      String(CFG.cartaConvite).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\n/g, "<br>");
+  }
 
   /* ===================== CÉU ESTRELADO ===================== */
   (function criarEstrelas() {
@@ -280,17 +284,28 @@
     };
   })();
 
-  /* ===================== ABERTURA ===================== */
+  /* ===================== ABERTURA (carta lacrada) ===================== */
   (function abertura() {
     const tela = document.getElementById("abertura");
+    const cena = document.getElementById("envCena");
     const conteudo = document.getElementById("conteudo");
-    const botao = document.getElementById("botaoAbrir");
-    botao.addEventListener("click", () => {
+    const selo = document.getElementById("selo");
+    const continuar = document.getElementById("botaoAbrir");
+
+    // 1) Aperta o selo -> a carta abre e sobe
+    selo.addEventListener("click", () => {
+      if (cena.classList.contains("aberta")) return;
+      cena.classList.add("aberta");
+      explodir(22);
+      if (window.__iniciarMusica) window.__iniciarMusica();
+    });
+
+    // 2) Continuar a leitura -> revela o resto da página
+    continuar.addEventListener("click", () => {
       explodir(46);
       tela.classList.add("oculto");
       conteudo.classList.add("visivel");
       if (window.__iniciarMusica) window.__iniciarMusica();
-      // começa as revelações só agora, com a página já visível
       setTimeout(() => {
         if (window.__iniciarReveal) window.__iniciarReveal();
       }, 300);
