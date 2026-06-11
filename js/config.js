@@ -53,15 +53,17 @@ const CONFIG = {
     "fotos/foto2.jpg",
     "fotos/foto3.jpg",
     "fotos/foto4.jpg",
+    "fotos/foto5.jpg",
   ],
 
   /* ---------- LEGENDAS DAS FOTOS (opcional) ----------
      Uma legenda para cada foto, na mesma ordem. Deixe "" se não quiser. */
   legendas: [
-    "Nosso primeiro encontro 🥰",
-    "Aquela viagem inesquecível ✈️",
-    "Rindo de tudo, como sempre 😂",
-    "Pra sempre, você e eu ❤️",
+    "Nossas noites favoritas 🥰",
+    "Do seu lado é o meu lugar ❤️",
+    "Estrada e pôr do sol com você 🌅",
+    "Parceira de treino e de vida 💪",
+    "Pra qualquer lugar, juntos ✨",
   ],
 
   /* ---------- MÚSICA DE FUNDO (opcional) ----------
