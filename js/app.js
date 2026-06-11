@@ -130,6 +130,10 @@
     fotos.forEach((src, i) => {
       const slide = document.createElement("div");
       slide.className = "slide";
+      // fundo desfocado da própria foto (preenche sem cortar a imagem)
+      const fundo = document.createElement("div");
+      fundo.className = "foto-fundo";
+      fundo.style.backgroundImage = "url('" + src + "')";
       const img = document.createElement("img");
       img.src = src;
       img.alt = legendas[i] || "Foto do casal";
@@ -139,6 +143,7 @@
         slide.className = "slide-vazio";
         slide.innerHTML = '<span>📷</span><div>Adicione sua foto em<br><b>' + src + '</b></div>';
       };
+      slide.appendChild(fundo);
       slide.appendChild(img);
       slidesEl.appendChild(slide);
 
