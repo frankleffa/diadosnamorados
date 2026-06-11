@@ -104,6 +104,10 @@
       els.horas.textContent = pad(horas);
       els.minutos.textContent = pad(minutos);
       els.segundos.textContent = pad(segundos);
+      // pulso a cada segundo
+      els.segundos.classList.remove("pulsa");
+      void els.segundos.offsetWidth;
+      els.segundos.classList.add("pulsa");
     }
     atualizar();
     setInterval(atualizar, 1000);
@@ -217,6 +221,33 @@
     }
   })();
 
+  /* ===================== SEÇÃO "EU AMO..." ===================== */
+  (function motivos() {
+    const lista = CFG.motivos && CFG.motivos.length ? CFG.motivos : [
+      "Do seu sorriso que ilumina tudo",
+      "Do jeitinho que você me abraça",
+      "De cada conversa até tarde",
+      "Da nossa parceria em tudo",
+      "De ser eu mesmo do seu lado",
+    ];
+    const ul = document.getElementById("motivos");
+    const bloco = document.getElementById("motivosBloco");
+    if (!ul || !bloco) return;
+    bloco.style.display = "flex";
+    lista.forEach((texto, i) => {
+      const li = document.createElement("li");
+      li.textContent = texto;
+      li.style.transitionDelay = (i * 0.15 + 0.1) + "s";
+      ul.appendChild(li);
+    });
+  })();
+
+  /* ===================== BOTÃO REVER A CARTA ===================== */
+  (function reabrir() {
+    const btn = document.getElementById("botaoReabrir");
+    if (btn) btn.addEventListener("click", () => location.reload());
+  })();
+
   /* ===================== EXPLOSÃO DE CORAÇÕES ===================== */
   function explodir(qtd) {
     const emoji = CFG.emojiChuva || "❤️";
@@ -239,24 +270,39 @@
 
   /* ===================== REVELAR AO ROLAR + DIGITAÇÃO ===================== */
   (function revelar() {
-    const alvos = document.querySelectorAll(".hero, .bloco");
-    alvos.forEach((el) => el.classList.add("reveal"));
+    const alvos = document.querySelectorAll(".reveal-alvo");
 
     const mensagemEl = document.getElementById("mensagem");
     let digitou = false;
+    let concluir = null; // permite "pular" a digitação
 
     function digitar() {
       if (digitou) return;
       digitou = true;
       let i = 0;
+      let pronto = false;
       mensagemEl.classList.add("digitando");
+
+      concluir = function () {
+        if (pronto) return;
+        pronto = true;
+        mensagemEl.textContent = textoMensagem;
+        mensagemEl.classList.remove("digitando");
+      };
+      // tocar/clicar na carta revela tudo de uma vez
+      const carta = mensagemEl.closest(".carta-aberta") || mensagemEl;
+      carta.style.cursor = "pointer";
+      carta.addEventListener("click", concluir);
+
+      // velocidade adaptada ao tamanho do texto (cartas longas digitam mais rápido)
+      const base = textoMensagem.length > 600 ? 11 : 22;
       (function passo() {
+        if (pronto) return;
         mensagemEl.textContent = textoMensagem.slice(0, i);
         if (i < textoMensagem.length) {
           i++;
-          // mais rápido em espaços, mais lento na pontuação
           const c = textoMensagem.charAt(i - 1);
-          const espera = ".!?".includes(c) ? 180 : 28;
+          const espera = ".!?".includes(c) ? base * 4 : (c === "\n" ? base * 3 : base);
           setTimeout(passo, espera);
         } else {
           mensagemEl.classList.remove("digitando");
