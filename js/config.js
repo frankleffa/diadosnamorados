@@ -58,7 +58,7 @@ const CONFIG = {
               Ex: "musica/nossa-musica.mp3"
      Opção B) Spotify: cole o LINK de uma música/playlist (começa com https://open.spotify.com/...)
      Deixe "" (vazio) nas duas se não quiser música. */
-  musicaArquivo: "",      // ex: "musica/nossa-musica.mp3"
+  musicaArquivo: "musica/perfect.mp3",   // Ed Sheeran - Perfect
   musicaSpotify: "",      // ex: "https://open.spotify.com/track/XXXXXXXX"
 
   /* ---------- EMOJI QUE CAI NA TELA ---------- */
