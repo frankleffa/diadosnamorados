@@ -54,14 +54,19 @@
   <!-- Conteúdo principal -->
   <main class="conteudo" id="conteudo">
 
-    <header class="hero">
+    <!-- 1) Abertura do conteúdo -->
+    <section class="tela tela-hero">
       <p class="hero-sub">Feliz Dia dos Namorados</p>
-      <h1 class="hero-nomes" id="heroNomes">Frank ❤️ Amor</h1>
-    </header>
+      <div class="hero-coracao">❤</div>
+      <h1 class="hero-nomes" id="heroNomes">Frank ❤️ Ana</h1>
+      <p class="hero-frase">um amor pra comemorar todos os dias</p>
+      <div class="scroll-baixo" aria-hidden="true">⌄</div>
+    </section>
 
-    <!-- Contador -->
-    <section class="bloco contador-bloco">
-      <p class="contador-label">Estamos juntos há</p>
+    <!-- 2) Contador -->
+    <section class="tela tela-contador reveal-alvo">
+      <p class="tela-rotulo">desde o nosso primeiro dia</p>
+      <h3 class="tela-titulo">Estamos juntos há</h3>
       <div class="contador" id="contador">
         <div class="unidade"><span class="valor" id="anos">0</span><span class="rotulo">anos</span></div>
         <div class="unidade"><span class="valor" id="meses">0</span><span class="rotulo">meses</span></div>
@@ -73,34 +78,46 @@
       <p class="contador-frase" id="contadorFrase"></p>
     </section>
 
-    <!-- Galeria de fotos -->
-    <section class="bloco galeria-bloco" id="galeriaBloco">
-      <h3 class="bloco-titulo">Nossos momentos</h3>
+    <!-- 3) Galeria de fotos (tela cheia) -->
+    <section class="tela tela-galeria reveal-alvo" id="galeriaBloco">
+      <h3 class="tela-titulo">Nossos momentos</h3>
       <div class="carrossel">
         <div class="slides" id="slides"></div>
         <button class="seta seta-esq" id="setaEsq" aria-label="Foto anterior">‹</button>
         <button class="seta seta-dir" id="setaDir" aria-label="Próxima foto">›</button>
+        <p class="legenda" id="legenda"></p>
       </div>
-      <p class="legenda" id="legenda"></p>
       <div class="bolinhas" id="bolinhas"></div>
     </section>
 
-    <!-- Mensagem -->
-    <section class="bloco mensagem-bloco">
-      <h3 class="bloco-titulo">Pra você</h3>
-      <p class="mensagem" id="mensagem"></p>
+    <!-- 4) Seção "Eu amo..." -->
+    <section class="tela tela-motivos reveal-alvo" id="motivosBloco" style="display:none;">
+      <h3 class="tela-titulo">Eu amo...</h3>
+      <ul class="motivos" id="motivos"></ul>
+    </section>
+
+    <!-- 5) Mensagem (carta) -->
+    <section class="tela tela-mensagem mensagem-bloco reveal-alvo">
+      <div class="carta-aberta">
+        <p class="tela-rotulo">· uma carta pra você ·</p>
+        <p class="mensagem" id="mensagem"></p>
+      </div>
     </section>
 
     <!-- Spotify (opcional) -->
-    <section class="bloco spotify-bloco" id="spotifyBloco" style="display:none;">
-      <h3 class="bloco-titulo">Nossa música</h3>
+    <section class="tela tela-spotify reveal-alvo" id="spotifyBloco" style="display:none;">
+      <h3 class="tela-titulo">Nossa música</h3>
       <div id="spotifyEmbed"></div>
     </section>
 
-    <footer class="rodape">
-      <div class="coracao-rodape">❤️</div>
-      <p>Feito com amor</p>
-    </footer>
+    <!-- 6) Final -->
+    <section class="tela tela-final reveal-alvo">
+      <div class="coracao-gigante">❤</div>
+      <h2 class="final-titulo">Eu te amo</h2>
+      <p class="final-sub">Feliz Dia dos Namorados 💍</p>
+      <button class="botao-reabrir" id="botaoReabrir">rever a carta 💌</button>
+    </section>
+
   </main>
 
   <audio id="audio" loop></audio>

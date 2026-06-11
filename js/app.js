@@ -104,6 +104,10 @@
       els.horas.textContent = pad(horas);
       els.minutos.textContent = pad(minutos);
       els.segundos.textContent = pad(segundos);
+      // pulso a cada segundo
+      els.segundos.classList.remove("pulsa");
+      void els.segundos.offsetWidth;
+      els.segundos.classList.add("pulsa");
     }
     atualizar();
     setInterval(atualizar, 1000);
@@ -217,6 +221,33 @@
     }
   })();
 
+  /* ===================== SEÇÃO "EU AMO..." ===================== */
+  (function motivos() {
+    const lista = CFG.motivos && CFG.motivos.length ? CFG.motivos : [
+      "Do seu sorriso que ilumina tudo",
+      "Do jeitinho que você me abraça",
+      "De cada conversa até tarde",
+      "Da nossa parceria em tudo",
+      "De ser eu mesmo do seu lado",
+    ];
+    const ul = document.getElementById("motivos");
+    const bloco = document.getElementById("motivosBloco");
+    if (!ul || !bloco) return;
+    bloco.style.display = "flex";
+    lista.forEach((texto, i) => {
+      const li = document.createElement("li");
+      li.textContent = texto;
+      li.style.transitionDelay = (i * 0.15 + 0.1) + "s";
+      ul.appendChild(li);
+    });
+  })();
+
+  /* ===================== BOTÃO REVER A CARTA ===================== */
+  (function reabrir() {
+    const btn = document.getElementById("botaoReabrir");
+    if (btn) btn.addEventListener("click", () => location.reload());
+  })();
+
   /* ===================== EXPLOSÃO DE CORAÇÕES ===================== */
   function explodir(qtd) {
     const emoji = CFG.emojiChuva || "❤️";
@@ -239,8 +270,7 @@
 
   /* ===================== REVELAR AO ROLAR + DIGITAÇÃO ===================== */
   (function revelar() {
-    const alvos = document.querySelectorAll(".hero, .bloco");
-    alvos.forEach((el) => el.classList.add("reveal"));
+    const alvos = document.querySelectorAll(".reveal-alvo");
 
     const mensagemEl = document.getElementById("mensagem");
     let digitou = false;

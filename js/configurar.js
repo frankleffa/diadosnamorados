@@ -14,6 +14,7 @@
     fraseContador: document.getElementById("fraseContador"),
     cartaConvite: document.getElementById("cartaConvite"),
     mensagem: document.getElementById("mensagem"),
+    motivos: document.getElementById("motivos"),
     musicaSpotify: document.getElementById("musicaSpotify"),
     emojiChuva: document.getElementById("emojiChuva"),
     inputFotos: document.getElementById("inputFotos"),
@@ -34,6 +35,7 @@
       el.fraseContador.value = s.fraseContador || "";
       el.cartaConvite.value = s.cartaConvite || "";
       el.mensagem.value = s.mensagem || "";
+      el.motivos.value = s.motivos || "";
       el.musicaSpotify.value = s.musicaSpotify || "";
       el.emojiChuva.value = s.emojiChuva || "❤️";
       fotos = s.fotos || [];
@@ -96,7 +98,7 @@
   });
 
   /* ---------- Salva rascunho automaticamente ---------- */
-  ["nomeCasal","tituloAba","data","hora","fraseContador","cartaConvite","mensagem","musicaSpotify","emojiChuva"]
+  ["nomeCasal","tituloAba","data","hora","fraseContador","cartaConvite","mensagem","motivos","musicaSpotify","emojiChuva"]
     .forEach(function (k) { el[k].addEventListener("input", salvarRascunho); });
 
   function salvarRascunho() {
@@ -109,7 +111,7 @@
       nomeCasal: el.nomeCasal.value, tituloAba: el.tituloAba.value,
       data: el.data.value, hora: el.hora.value,
       fraseContador: el.fraseContador.value, cartaConvite: el.cartaConvite.value,
-      mensagem: el.mensagem.value,
+      mensagem: el.mensagem.value, motivos: el.motivos.value,
       musicaSpotify: el.musicaSpotify.value, emojiChuva: el.emojiChuva.value,
       fotos: fotos,
     };
@@ -127,6 +129,7 @@
       fraseContador: el.fraseContador.value || "Tempo que estamos juntos 💕",
       cartaConvite: el.cartaConvite.value || "Hoje é o nosso dia.\nPreparei uma coisinha especial só pra você... 💌",
       mensagem: el.mensagem.value || "Eu te amo ❤️",
+      motivos: el.motivos.value.split("\n").map(function (s) { return s.trim(); }).filter(Boolean),
       fotos: fotos.map(function (f) { return f.url; }),
       legendas: fotos.map(function (f) { return f.legenda || ""; }),
       musicaArquivo: "",
@@ -157,6 +160,7 @@
       "  fraseContador: " + JSON.stringify(c.fraseContador) + ",\n" +
       "  cartaConvite: " + JSON.stringify(c.cartaConvite) + ",\n" +
       "  mensagem: " + JSON.stringify(c.mensagem) + ",\n" +
+      "  motivos: " + JSON.stringify(c.motivos, null, 2) + ",\n" +
       "  fotos: " + JSON.stringify(c.fotos, null, 2) + ",\n" +
       "  legendas: " + JSON.stringify(c.legendas, null, 2) + ",\n" +
       "  musicaArquivo: " + JSON.stringify(c.musicaArquivo) + ",\n" +

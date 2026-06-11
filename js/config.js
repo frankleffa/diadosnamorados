@@ -34,6 +34,17 @@ const CONFIG = {
             "Você é o meu presente todos os dias, não só hoje.\n\n" +
             "Feliz Dia dos Namorados! Eu te amo. ❤️",
 
+  /* ---------- SEÇÃO "EU AMO..." ----------
+     Uma lista de coisinhas que você ama nela. Deixe a lista vazia [] para esconder
+     a seção, ou personalize à vontade. */
+  motivos: [
+    "Do seu sorriso que ilumina tudo",
+    "Do jeitinho que você me abraça",
+    "De cada conversa até tarde",
+    "Da nossa parceria em tudo",
+    "De ser eu mesmo do seu lado",
+  ],
+
   /* ---------- FOTOS DO CASAL ----------
      Coloque suas imagens na pasta "fotos/" e liste os nomes aqui.
      Ex: "fotos/nossa-foto-1.jpg"  */
