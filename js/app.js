@@ -6,12 +6,29 @@
 (function () {
   "use strict";
 
+  /* ---------- Define qual configuração usar ----------
+     Por padrão usa o arquivo js/config.js (CONFIG).
+     Mas se a página for aberta em modo prévia (index.html?previa=1),
+     usa os dados salvos pela página de configuração. */
+  var CFG = (typeof CONFIG !== "undefined") ? CONFIG : {};
+  try {
+    var params = new URLSearchParams(location.search);
+    if (params.get("previa") === "1") {
+      var salvo = localStorage.getItem("ddn_previa");
+      if (salvo) { CFG = JSON.parse(salvo); }
+    }
+  } catch (e) { /* ignora */ }
+
   /* ---------- Aplica textos do config ---------- */
-  document.title = CONFIG.tituloAba || "Feliz Dia dos Namorados";
-  document.getElementById("heroNomes").textContent = CONFIG.nomeCasal;
-  document.getElementById("aberturaNomes").textContent = CONFIG.nomeCasal;
-  document.getElementById("contadorFrase").textContent = CONFIG.fraseContador || "";
-  document.getElementById("mensagem").textContent = CONFIG.mensagem || "";
+  document.title = CFG.tituloAba || "Feliz Dia dos Namorados";
+  document.getElementById("heroNomes").textContent = CFG.nomeCasal || "";
+  document.getElementById("aberturaNomes").textContent = CFG.nomeCasal || "";
+  document.getElementById("contadorFrase").textContent = CFG.fraseContador || "";
+  var textoMensagem = CFG.mensagem || "";   // será "digitada" quando aparecer na tela
+  if (CFG.cartaConvite) {
+    document.getElementById("cartaTexto").innerHTML =
+      String(CFG.cartaConvite).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\n/g, "<br>");
+  }
 
   /* ===================== CÉU ESTRELADO ===================== */
   (function criarEstrelas() {
@@ -31,7 +48,7 @@
   /* ===================== CHUVA DE CORAÇÕES ===================== */
   (function chuvaCoracoes() {
     const chuva = document.getElementById("chuva");
-    const emoji = CONFIG.emojiChuva || "❤️";
+    const emoji = CFG.emojiChuva || "❤️";
     function soltar() {
       const gota = document.createElement("span");
       gota.className = "gota";
@@ -48,7 +65,8 @@
 
   /* ===================== CONTADOR AO VIVO ===================== */
   (function contador() {
-    const inicio = CONFIG.dataInicio;
+    // Aceita tanto um objeto Date (do config.js) quanto texto ISO (da prévia)
+    const inicio = new Date(CFG.dataInicio);
     const els = {
       anos: document.getElementById("anos"),
       meses: document.getElementById("meses"),
@@ -93,8 +111,8 @@
 
   /* ===================== GALERIA / CARROSSEL ===================== */
   (function galeria() {
-    const fotos = CONFIG.fotos || [];
-    const legendas = CONFIG.legendas || [];
+    const fotos = CFG.fotos || [];
+    const legendas = CFG.legendas || [];
     const slidesEl = document.getElementById("slides");
     const bolinhasEl = document.getElementById("bolinhas");
     const legendaEl = document.getElementById("legenda");
@@ -154,8 +172,8 @@
     let tocando = false;
 
     // Opção Spotify
-    if (CONFIG.musicaSpotify) {
-      const id = extrairSpotify(CONFIG.musicaSpotify);
+    if (CFG.musicaSpotify) {
+      const id = extrairSpotify(CFG.musicaSpotify);
       if (id) {
         document.getElementById("spotifyBloco").style.display = "block";
         document.getElementById("spotifyEmbed").innerHTML =
@@ -164,14 +182,14 @@
     }
 
     // Opção arquivo de áudio
-    if (CONFIG.musicaArquivo) {
-      audio.src = CONFIG.musicaArquivo;
+    if (CFG.musicaArquivo) {
+      audio.src = CFG.musicaArquivo;
     } else {
-      botao.style.display = CONFIG.musicaSpotify ? "none" : botao.style.display;
+      botao.style.display = CFG.musicaSpotify ? "none" : botao.style.display;
     }
 
     function toggle() {
-      if (!CONFIG.musicaArquivo) return;
+      if (!CFG.musicaArquivo) return;
       if (tocando) {
         audio.pause();
         botao.classList.remove("tocando");
@@ -185,7 +203,7 @@
 
     // Tenta iniciar a música quando o presente é aberto
     window.__iniciarMusica = function () {
-      if (CONFIG.musicaArquivo && !tocando) {
+      if (CFG.musicaArquivo && !tocando) {
         audio.play().then(() => {
           tocando = true;
           botao.classList.add("tocando");
@@ -199,15 +217,98 @@
     }
   })();
 
-  /* ===================== ABERTURA ===================== */
+  /* ===================== EXPLOSÃO DE CORAÇÕES ===================== */
+  function explodir(qtd) {
+    const emoji = CFG.emojiChuva || "❤️";
+    const camada = document.createElement("div");
+    camada.className = "explosao";
+    document.body.appendChild(camada);
+    for (let i = 0; i < qtd; i++) {
+      const p = document.createElement("span");
+      p.textContent = emoji;
+      const ang = Math.random() * Math.PI * 2;
+      const dist = Math.random() * 240 + 80;
+      p.style.setProperty("--tx", Math.cos(ang) * dist + "px");
+      p.style.setProperty("--ty", Math.sin(ang) * dist + "px");
+      p.style.fontSize = (Math.random() * 1.4 + 0.8) + "rem";
+      p.style.animationDelay = (Math.random() * 0.15) + "s";
+      camada.appendChild(p);
+    }
+    setTimeout(() => camada.remove(), 1600);
+  }
+
+  /* ===================== REVELAR AO ROLAR + DIGITAÇÃO ===================== */
+  (function revelar() {
+    const alvos = document.querySelectorAll(".hero, .bloco");
+    alvos.forEach((el) => el.classList.add("reveal"));
+
+    const mensagemEl = document.getElementById("mensagem");
+    let digitou = false;
+
+    function digitar() {
+      if (digitou) return;
+      digitou = true;
+      let i = 0;
+      mensagemEl.classList.add("digitando");
+      (function passo() {
+        mensagemEl.textContent = textoMensagem.slice(0, i);
+        if (i < textoMensagem.length) {
+          i++;
+          // mais rápido em espaços, mais lento na pontuação
+          const c = textoMensagem.charAt(i - 1);
+          const espera = ".!?".includes(c) ? 180 : 28;
+          setTimeout(passo, espera);
+        } else {
+          mensagemEl.classList.remove("digitando");
+        }
+      })();
+    }
+
+    // Só começa a observar depois que o presente é aberto.
+    window.__iniciarReveal = function () {
+      if ("IntersectionObserver" in window) {
+        const obs = new IntersectionObserver((entradas) => {
+          entradas.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("ativo");
+              if (e.target.classList.contains("mensagem-bloco")) digitar();
+              obs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.2 });
+        alvos.forEach((el) => obs.observe(el));
+      } else {
+        alvos.forEach((el) => el.classList.add("ativo"));
+        digitar();
+      }
+    };
+  })();
+
+  /* ===================== ABERTURA (carta lacrada) ===================== */
   (function abertura() {
     const tela = document.getElementById("abertura");
+    const cena = document.getElementById("envCena");
     const conteudo = document.getElementById("conteudo");
-    const botao = document.getElementById("botaoAbrir");
-    botao.addEventListener("click", () => {
+    const selo = document.getElementById("selo");
+    const continuar = document.getElementById("botaoAbrir");
+
+    // 1) Aperta o selo -> a carta abre e sobe
+    selo.addEventListener("click", () => {
+      if (cena.classList.contains("aberta")) return;
+      cena.classList.add("aberta");
+      explodir(22);
+      if (window.__iniciarMusica) window.__iniciarMusica();
+    });
+
+    // 2) Continuar a leitura -> revela o resto da página
+    continuar.addEventListener("click", () => {
+      explodir(46);
       tela.classList.add("oculto");
       conteudo.classList.add("visivel");
       if (window.__iniciarMusica) window.__iniciarMusica();
+      setTimeout(() => {
+        if (window.__iniciarReveal) window.__iniciarReveal();
+      }, 300);
     });
   })();
 

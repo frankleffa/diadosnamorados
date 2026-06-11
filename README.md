@@ -13,7 +13,25 @@ Ela tem:
 
 ---
 
-## 🛠️ Como personalizar (passo a passo)
+## ✨ Jeito fácil: página de configuração (recomendado)
+
+Abra o arquivo **`configurar.html`** no navegador. Lá você preenche tudo num
+formulário simples e faz **upload das fotos** sem mexer em código:
+
+1. Preencha nomes, data, mensagem e (se quiser) link de música do Spotify.
+2. Arraste/escolha as fotos e ajuste a ordem e as legendas.
+3. Clique em **👀 Ver prévia** pra ver como ficou.
+4. Clique em **⬇️ Baixar arquivo pronto** — ele baixa um `config.js` com tudo
+   embutido (inclusive as fotos).
+5. Substitua o arquivo `js/config.js` do projeto por esse que você baixou e publique.
+
+> Pra abrir o `configurar.html` localmente, use o servidor local (veja a seção
+> "Como ver no seu computador" mais abaixo) e acesse `http://localhost:8000/configurar.html`.
+> Depois de publicar, ele também fica em `https://SEU-USUARIO.github.io/diadosnamorados/configurar.html`.
+
+---
+
+## 🛠️ Jeito manual: editar o arquivo `js/config.js`
 
 ### 1. Edite o arquivo `js/config.js`
 Esse é o **único** arquivo que você precisa mexer. Abra ele e troque:
@@ -46,7 +64,19 @@ Depois acesse no navegador: **http://localhost:8000**
 
 ---
 
-## 🚀 Como publicar de graça (GitHub Pages)
+## 🚀 Como publicar de graça
+
+### Opção 1 — Vercel (mais fácil, recomendado)
+
+1. Acesse **https://vercel.com** e entre com a sua conta do **GitHub**.
+2. Clique em **Add New… → Project**.
+3. Encontre o repositório **diadosnamorados** e clique em **Import**.
+4. Não precisa configurar nada (é um site estático). Clique em **Deploy**.
+5. Em segundos seu site fica no ar num link tipo `https://diadosnamorados.vercel.app`.
+
+A cada novo commit, o Vercel atualiza o site sozinho. 🎉
+
+### Opção 2 — GitHub Pages
 
 1. Suba esses arquivos pro seu repositório no GitHub (já está feito 😉).
 2. No GitHub, vá em **Settings** → **Pages**.
