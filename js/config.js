@@ -54,6 +54,11 @@ const CONFIG = {
     "fotos/foto3.jpg",
     "fotos/foto4.jpg",
     "fotos/foto5.jpg",
+    "fotos/foto6.jpg",
+    "fotos/foto7.jpg",
+    "fotos/foto8.jpg",
+    "fotos/foto9.jpg",
+    "fotos/foto10.jpg",
   ],
 
   /* ---------- LEGENDAS DAS FOTOS (opcional) ----------
@@ -64,6 +69,11 @@ const CONFIG = {
     "Estrada e pôr do sol com você 🌅",
     "Parceira de treino e de vida 💪",
     "Pra qualquer lugar, juntos ✨",
+    "Prontos pra arrasar juntos 💚",
+    "Nossa bagunça favorita 😜",
+    "Combinando até sem querer ❤️",
+    "Vista linda, companhia melhor ainda 🌊",
+    "No topo do mundo, com você ✨",
   ],
 
   /* ---------- MÚSICA DE FUNDO (opcional) ----------
