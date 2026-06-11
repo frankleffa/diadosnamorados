@@ -58,11 +58,12 @@ Frank`,
      Uma lista de coisinhas que você ama nela. Deixe a lista vazia [] para esconder
      a seção, ou personalize à vontade. */
   motivos: [
-    "Do seu sorriso que ilumina tudo",
-    "Do jeitinho que você me abraça",
-    "De cada conversa até tarde",
-    "Da nossa parceria em tudo",
-    "De ser eu mesmo do seu lado",
+    "Do seu sorriso, que ilumina até os meus dias ruins",
+    "De como você é pura e autêntica, sem máscaras",
+    "De a gente ser namorados e, acima de tudo, melhores amigos — isso não tem preço",
+    "De cada risada boba que só nós dois entendemos",
+    "Da sua parceria, que aguenta qualquer fase ao meu lado",
+    "De saber que, com você, até o difícil vale a pena",
   ],
 
   /* ---------- FOTOS DO CASAL ----------
