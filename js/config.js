@@ -17,8 +17,8 @@ const CONFIG = {
   /* ---------- DATA EM QUE VOCÊS COMEÇARAM ----------
      Formato: ano, mês, dia, hora, minuto
      ATENÇÃO: o mês começa em 0! (Janeiro = 0, Fevereiro = 1, ... Dezembro = 11)
-     Exemplo abaixo = 1 de janeiro de 2022, à meia-noite */
-  dataInicio: new Date(2022, 0, 1, 0, 0, 0),
+     Exemplo abaixo = 1 de janeiro de 2023, à meia-noite */
+  dataInicio: new Date(2023, 0, 1, 0, 0, 0),
 
   /* ---------- TEXTO DA CARTA (tela de abertura, antes de abrir o selo) ----------
      Use \n para quebrar linha. */
@@ -52,7 +52,9 @@ Feliz Dia dos Namorados.
 Eu te amo.
 
 Com amor,
-Frank`,
+Frank
+
+Obs.: e eu quero que você pare de dizer que não quer atrapalhar os meus sonhos e me deixar viver em São Paulo — porque, na verdade, o meu sonho é nosso. Ele sempre foi sobre nós, e não só sobre mim. Você é o meu sol, fidida..`,
 
   /* ---------- SEÇÃO "EU AMO..." ----------
      Uma lista de coisinhas que você ama nela. Deixe a lista vazia [] para esconder
